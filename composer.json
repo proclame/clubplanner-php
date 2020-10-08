@@ -1,0 +1,50 @@
+{
+    "name": "proclame/clubplanner-php",
+    "type": "library",
+    "description": "A PHP wrapper for using clubplanner's API",
+    "keywords": [
+        "proclame", "clubplanner", "api", "wrapper","php"
+    ],
+    "homepage": "https://github.com/proclame/clubplanner-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nick Mispoulier",
+            "email": "nick@proclame.be",
+            "homepage": "https://github.com/proclame",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "~7.2",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "^1.9",
+        "phpunit/phpunit": ">=8.0",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Proclame\\Clubplanner\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Proclame\\Clubplanner\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src",
+        "fix-style": "phpcbf src tests"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
