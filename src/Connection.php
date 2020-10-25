@@ -31,12 +31,6 @@ class Connection
 
         return $this->client;
     }
-    public function connect()
-    {
-        $client = $this->client();
-        return $client;
-    }
-
 
     /**
      * @param string $method
@@ -55,11 +49,6 @@ class Connection
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ]);
-
-        // If we have a token, sign the request
-        if (! empty($this->accessToken)) {
-            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
-        }
 
         $params = array_merge($params, ['token' => $this->apiKey]);
         $endpoint .= '?' . http_build_query($params);
@@ -176,6 +165,9 @@ class Connection
      */
     private function formatUrl(string $endpoint) : string
     {
+        if ($endpoint === 'home/wakeup') {
+            return 'https://' . $this->apiUrl . '/' . $endpoint;
+        }
         return 'https://' . $this->apiUrl . '/api/' . $endpoint;
     }
 }

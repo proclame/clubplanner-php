@@ -25,7 +25,6 @@ class ClubplannerMemberTest extends TestCase
         $this->connection = new Connection();
         $this->connection->setApiKey($_ENV['CLUBPLANNER_TOKEN']);
         $this->connection->setApiUrl($_ENV['CLUBPLANNER_URL']);
-        $this->connection->connect();
         $this->faker = Factory::create('nl_BE');
         $this->clubplanner = new Clubplanner($this->connection);
     }
@@ -137,5 +136,46 @@ class ClubplannerMemberTest extends TestCase
         $this->assertIsInt($member->Id);
         $this->assertEquals($memberId, $member->Id);
         $this->assertEquals($newEmail, $member->EmailAddress);
+    }
+
+
+    public function testUpdateStatusUpdatesTheMemberStatus()
+    {
+        $email = $this->faker->email;
+        $firstname = $this->faker->firstname;
+        $lastname = $this->faker->lastname;
+
+        $member = $this->clubplanner->member()->add([
+            'email' => $email,
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+        ]);
+
+        $member->updateStatus(3);
+        $member = $this->clubplanner->member()->find($member->Id);
+        $this->assertEquals(3, $member->StatusId);
+    }
+
+    public function testSubscribeAndUnsubscribesWorksCorrectly()
+    {
+        $email = $this->faker->email;
+        $firstname = $this->faker->firstname;
+        $lastname = $this->faker->lastname;
+
+        $member = $this->clubplanner->member()->add([
+            'email' => $email,
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+        ]);
+
+        $member->subscribe();
+        $member = $this->clubplanner->member()->find($member->Id);
+        $this->assertEquals(true, $member->Newsletter);
+        $member->unsubscribe();
+        $member = $this->clubplanner->member()->find($member->Id);
+        $this->assertEquals(false, $member->Newsletter);
+        $member->subscribe();
+        $member = $this->clubplanner->member()->find($member->Id);
+        $this->assertEquals(true, $member->Newsletter);
     }
 }

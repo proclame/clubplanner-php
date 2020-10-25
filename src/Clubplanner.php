@@ -5,6 +5,7 @@ namespace Proclame\Clubplanner;
 use Proclame\Clubplanner\Connection;
 use Proclame\Clubplanner\Models\Club;
 use Proclame\Clubplanner\Models\Member;
+use Proclame\Clubplanner\Models\MemberSubscription;
 use Proclame\Clubplanner\Models\Status;
 use Proclame\Clubplanner\Models\Calendar;
 use Proclame\Clubplanner\Models\Employee;
@@ -44,6 +45,10 @@ class Clubplanner
         return new Member($this->connection, $attributes);
     }
 
+    public function member_subscription($attributes = [])
+    {
+        return new MemberSubscription($this->connection, $attributes);
+    }
     public function employee($attributes = [])
     {
         return new Employee($this->connection, $attributes);
@@ -83,5 +88,10 @@ class Clubplanner
     public function parameter($attributes = [])
     {
         return new Parameter($this->connection, $attributes);
+    }
+
+    public function wakeup()
+    {
+        return $this->connection->get('home/wakeup');
     }
 }

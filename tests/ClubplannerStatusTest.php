@@ -2,36 +2,32 @@
 
 namespace Proclame\Clubplanner\Test;
 
-use Faker\Factory;
 use PHPUnit\Framework\TestCase;
 use Proclame\Clubplanner\Connection;
 use Proclame\Clubplanner\Clubplanner;
-use Proclame\Clubplanner\Models\Calendar;
-use Proclame\Clubplanner\Exceptions\ClubplannerException;
+use Proclame\Clubplanner\Models\Status;
 
 /**
  * @runTestsInSeparateProcesses
  */
-class ClubplannerCalendarTest extends TestCase
+class ClubplannerStatusTest extends TestCase
 {
     protected $connection;
     protected $clubplanner;
 
-    protected $faker;
 
     protected function setUp(): void
     {
         $this->connection = new Connection();
         $this->connection->setApiKey($_ENV['CLUBPLANNER_TOKEN']);
         $this->connection->setApiUrl($_ENV['CLUBPLANNER_URL']);
-        $this->faker = Factory::create('nl_BE');
         $this->clubplanner = new Clubplanner($this->connection);
     }
 
-    public function testGetCalendarsShouldReturnArrayOfCalendars()
+    public function testGetStatussShouldReturnArrayOfStatuss()
     {
-        $calendars = $this->clubplanner->calendar()->get();
-        $this->assertIsArray($calendars);
-        $this->assertInstanceOf(Calendar::class, $calendars[0]);
+        $Statusses = $this->clubplanner->Status()->get();
+        $this->assertIsArray($Statusses);
+        $this->assertInstanceOf(Status::class, $Statusses[0]);
     }
 }

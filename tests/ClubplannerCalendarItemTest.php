@@ -24,7 +24,6 @@ class ClubplannerCalendarItemTest extends TestCase
         $this->connection = new Connection();
         $this->connection->setApiKey($_ENV['CLUBPLANNER_TOKEN']);
         $this->connection->setApiUrl($_ENV['CLUBPLANNER_URL']);
-        $this->connection->connect();
         $this->faker = Factory::create('nl_BE');
         $this->clubplanner = new Clubplanner($this->connection);
     }
