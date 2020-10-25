@@ -1,21 +1,21 @@
 # API Map
 
 ## General
- - Home Wakeup
+ - Home Wakeup ✅
  - GetImage ??
 
 ## Member
- - find: by id ✅, email or UID
- - all: list all members in DB
- - get: list multiple members, filter.
+ - find: by id ✅, email✅ or UID✅
+ - all: list all members in DB✅
+ - get: list multiple members, filter. ✅
  - forgot password: by id or email ✅
- - add
- - update
- - delete
- - updateStatus
- - (un)subscribe ? = update
- - get Subscriptions
- - add subscription
+ - add ✅
+ - update ✅
+ - delete => Not available in API ❌
+ - updateStatus ✅
+ - (un)subscribe ? = update ✅
+ - get Subscriptions ✅
+ - add subscription => rechtstreeks via MemberSubscription
  - send SMS
  - send Email
  - verify Password
@@ -49,7 +49,6 @@
 
 ## Status (memberStatus)
  - all / list ✅
-
 
  ## Subscription
   - get subscription options

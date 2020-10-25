@@ -56,6 +56,27 @@ class Member extends Model
         return $member;
     }
 
+    public function updateStatus($statusId, $memberId = null)
+    {
+        return $this->connection()->get('Member/UpdateStatus', ['memberid' => $memberId ?? $this->attributes['Id'], 'statusid' => $statusId]);
+    }
+
+    public function subscribe()
+    {
+        return $this->update(['newsletter' => true]);
+    }
+
+    public function unsubscribe()
+    {
+        return $this->update(['newsletter' => false]);
+    }
+
+    public function member_subscriptions()
+    {
+        return (new MemberSubscription($this->connection))->get(['memberid' => $this->Id]);
+    }
+
+
     private function getOwnerQuery($owner_ids)
     {
         $ownerquery = '( owner = \'-1\'';
